@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author lab608
@@ -21,6 +22,8 @@ public class book3 extends javax.swing.JFrame {
      */
     public book3() {
         initComponents();
+        showRemainingSpots("Boat House");
+        
     }
 
     /**
@@ -32,19 +35,20 @@ public class book3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtDate = new javax.swing.JTextField();
+        jTextFieldDate = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtPeople = new javax.swing.JTextField();
+        jTextFieldPeople = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabelRemainingSpots = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtDate.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDateActionPerformed(evt);
+                jTextFieldDateActionPerformed(evt);
             }
         });
 
@@ -68,32 +72,36 @@ public class book3 extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/step1/eco5.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
 
+        jLabelRemainingSpots.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelRemainingSpots.setText("Remaining Spots:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(110, 110, 110)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
+                                .addComponent(jTextFieldPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelRemainingSpots, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(29, 29, 29)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(397, 397, 397))
         );
@@ -107,12 +115,14 @@ public class book3 extends javax.swing.JFrame {
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(64, 64, 64)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelRemainingSpots)
+                        .addGap(35, 35, 35)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -123,50 +133,52 @@ public class book3 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+    private void jTextFieldDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDateActionPerformed
+    }//GEN-LAST:event_jTextFieldDateActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-  try (Connection con = Database.getConnection()) {
-        int numberOfPeople = Integer.parseInt(txtPeople.getText());
-        String bookingDate = txtDate.getText(); // format: YYYY-MM-DD
+  try {
+    Connection con = DBConnection.getConnection();
+    String insertQuery = "INSERT INTO bookings (package, booking_date, people) VALUES (?, ?, ?)";
+    PreparedStatement pst = con.prepareStatement(insertQuery);
+    pst.setString(1, "Boat House"); // Replace with actual package
+    pst.setString(2, jTextFieldDate.getText());
+    pst.setInt(3, Integer.parseInt(jTextFieldPeople.getText()));
+    pst.executeUpdate();
 
-        // Step 1: Insert booking
-        String sql = "INSERT INTO bookings (package_id, people, date, status) VALUES (?, ?, ?, ?)";
-        PreparedStatement pst = con.prepareStatement(sql);
+    String updateSpots = "UPDATE spots SET booked_spots = booked_spots + ? WHERE package = ?";
+    PreparedStatement pst2 = con.prepareStatement(updateSpots);
+    pst2.setInt(1, Integer.parseInt(jTextFieldPeople.getText()));
+ 
+pst2.setString(2, "Boat House");
 
-        pst.setInt(1, 3); // package_id for House Boat
-        pst.setInt(2, numberOfPeople);
-        pst.setString(3, bookingDate);
-        pst.setString(4, "Confirmed");
-        pst.executeUpdate();
+    pst2.executeUpdate();
 
-        // Step 2: Update spots in packages table
-        String updateSql = "UPDATE packages SET spots_left = spots_left - ? WHERE id = ?";
-        PreparedStatement pst2 = con.prepareStatement(updateSql);
-        pst2.setInt(1, numberOfPeople);
-        pst2.setInt(2, 3);
-        pst2.executeUpdate();
-
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "House Boat Booking successful! People: " + numberOfPeople + ", Date: " + bookingDate);
-
-        new thankyou().setVisible(true);
-
-    } catch (NumberFormatException nfe) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error: Please enter a valid number for 'No. of People'.");
-        nfe.printStackTrace();
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
-        e.printStackTrace();
-    }
+    JOptionPane.showMessageDialog(null, "Booking successful!");
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+}
 
 
         
          new thankyou().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+public void showRemainingSpots(String packageName) {
+    try (Connection con = DBConnection.getConnection()) {
+        String query = "SELECT total_spots - booked_spots AS remaining FROM spots WHERE package = ?";
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, packageName);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int remaining = rs.getInt("remaining");
+            jLabelRemainingSpots.setText("Remaining Spots for " + packageName + ": " + remaining);
+        }
+    } catch (Exception e) {
+        jLabelRemainingSpots.setText("Error loading spots");
+    }
+}
 
     /**
      * @param args the command line arguments
@@ -209,7 +221,8 @@ public class book3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtDate;
-    private javax.swing.JTextField txtPeople;
+    private javax.swing.JLabel jLabelRemainingSpots;
+    private javax.swing.JTextField jTextFieldDate;
+    private javax.swing.JTextField jTextFieldPeople;
     // End of variables declaration//GEN-END:variables
 }

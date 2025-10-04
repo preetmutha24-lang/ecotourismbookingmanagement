@@ -10,42 +10,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author lab608
  */
 public class MyBookings extends javax.swing.JFrame {
 public void loadBookings() {
-    try (Connection con = Database.getConnection()) {
-        String sql = "SELECT b.id, p.name AS package, b.date, b.people " +
-                     "FROM bookings b " +
-                     "JOIN packages p ON b.package_id = p.id";
+    DefaultTableModel model = (DefaultTableModel) yourJTable.getModel();
+    model.setRowCount(0); // Clear existing
 
-        PreparedStatement pst = con.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-
-        // Get model of JTable
-        javax.swing.table.DefaultTableModel model = 
-            (javax.swing.table.DefaultTableModel) tblBookings.getModel();
-
-        // Clear old rows
-        model.setRowCount(0);
-
-        // Add rows one by one
+    try (Connection con = DBConnection.getConnection()) {
+        String query = "SELECT * FROM bookings";
+        ResultSet rs = con.createStatement().executeQuery(query);
         while (rs.next()) {
             Object[] row = {
-                rs.getInt("id"),
+                rs.getInt("booking_id"),
                 rs.getString("package"),
-                rs.getDate("date"),
+                rs.getDate("booking_date"),
                 rs.getInt("people")
             };
             model.addRow(row);
         }
-
     } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Error loading bookings: " + e.getMessage());
-        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error loading bookings: " + e.getMessage());
     }
 }
 
@@ -54,7 +42,7 @@ public void loadBookings() {
      */
     public MyBookings() {
         initComponents();
-    loadBookings();
+        loadBookings();
     }
 
     /**
@@ -67,11 +55,11 @@ public void loadBookings() {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblBookings = new javax.swing.JTable();
+        yourJTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblBookings.setModel(new javax.swing.table.DefaultTableModel(
+        yourJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -82,7 +70,7 @@ public void loadBookings() {
                 "BOOKING ID", "PACKAGE ", "DATE", "PEOPLE"
             }
         ));
-        jScrollPane1.setViewportView(tblBookings);
+        jScrollPane1.setViewportView(yourJTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,9 +84,9 @@ public void loadBookings() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(84, 84, 84)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,6 +129,6 @@ public void loadBookings() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblBookings;
+    private javax.swing.JTable yourJTable;
     // End of variables declaration//GEN-END:variables
 }
